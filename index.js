@@ -4,16 +4,19 @@ var express 	 = require('express');
 var ejsLayouts = require('express-ejs-layouts');
 var bodyParser = require('body-parser');
 var request    = require('request');
+var path 			 = require('path');
 var app 			 = express();
 
 // app.set and app.use 
 // used for rendering a front-end
 
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname+ 'views'));
+app.use(express.static(__dirname + '/views'));
+app.use(express.static(__dirname + '/public'));
 app.use(ejsLayouts);
 app.use(bodyParser.urlencoded({extended: false}));
 
+console.log(path.resolve(__dirname, '../'));
 
 // trying to render just to test the app is working
 
@@ -37,13 +40,13 @@ app.get('/', function(req, res) {
 	var url = ('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + origin + '&destinations=' + destination + '&mode=' + travelMode + '&language=en-EN&key=' + 'AIzaSyDo32Za0RzapNrTIxMulGkYcd-Cx9FiHaM')
 	request(url, function(err, response, data) {
 		var finalResults = JSON.parse(data);
-		// console.log(finalResults.rows[0]);
+		console.log(finalResults);
 		// console.log('yay' + finalResults.rows[0].elements[0].duration.text);
 		// console.log(data[1]);
 
 		// console.log(travelMode);
 
-		res.render('index', {results: finalResults});
+		res.render('index', {results: finalResults, travel: travelMode});
 		// console.log('working?');
 	});
 });

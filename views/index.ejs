@@ -1,7 +1,30 @@
 <div class="well">
 
-	<h3>making sure index.ejs is working</h3>
+	<h3>Testing out this piece of shit:</h3>
 
 	<h2><%= results.rows[0].elements[0].duration.text %></h2>
+
+
+	<form action="/" method="GET" role="search" name="q">
+		<div class="form-row">
+			<div class="col-lg-4">
+				<input type="text" class="form-control header-search" placeholder="e.g. Seattle, WA" name="q">
+			</div>
+			<div class="col-lg-4">
+				<input type="text" class="form-control header-search" placeholder="e.g. Portland, OR" name="z">
+			</div>
+			<div class="col">
+				<select class="custom-select" name="travel">
+				  <option selected>Choose Your Travel Mode:</option>
+				  <option value="bicycling" id="bicylcing">Bicycle</option>
+				  <option value="driving">Driving</option>
+				  <option value="walking">Walking</option>
+				</select>
+			</div>
+			<div class="col">
+				<button type="submit" class="btn header-submit">Search</button>
+			</div>
+		</div>
+	</form>
 
 </div>

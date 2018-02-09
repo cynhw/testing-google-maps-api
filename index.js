@@ -27,12 +27,22 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.get('/', function(req, res) {
 	var results = "";
 	// var api = process.env.MAPS_API_KEY;
-	// var duration = req.query.q;
-	var url = ('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=' + 'AIzaSyDo32Za0RzapNrTIxMulGkYcd-Cx9FiHaM');
+	var origin = req.query.q;
+	var destination = req.query.z;
+	var travelMode = req.query.travel;
+	console.log(origin);
+	console.log(destination);
+	console.log(travelMode);
+	// var url = ('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=' + origin + '&destinations=' + destination + '&key=' + 'AIzaSyDo32Za0RzapNrTIxMulGkYcd-Cx9FiHaM');
+	var url = ('https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + origin + '&destinations=' + destination + '&mode=' + travelMode + '&language=en-EN&key=' + 'AIzaSyDo32Za0RzapNrTIxMulGkYcd-Cx9FiHaM')
 	request(url, function(err, response, data) {
 		var finalResults = JSON.parse(data);
-		console.log(finalResults.rows[0].elements[0].duration.text);
+		// console.log(finalResults.rows[0]);
+		// console.log('yay' + finalResults.rows[0].elements[0].duration.text);
 		// console.log(data[1]);
+
+		// console.log(travelMode);
+
 		res.render('index', {results: finalResults});
 		// console.log('working?');
 	});
